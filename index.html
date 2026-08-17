@@ -56,7 +56,7 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- TELA DE AUTENTICAÇÃO (LOGIN / REGISTO COM CÓDIGO DE CONVITE) -->
+    <!-- TELA DE AUTENTICAÇÃO (LOGIN / REGISTO) -->
     <div id="authSection" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950">
         <div class="glass-panel rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative border border-slate-800">
             
@@ -69,7 +69,7 @@
                 <p class="text-xs text-slate-400 font-medium">Instituto Médio Privado De Saúde</p>
             </div>
 
-            <!-- Tab Switcher (Login vs Cadastro) -->
+            <!-- Tab Switcher -->
             <div class="flex rounded-xl bg-slate-900 p-1 mb-6 border border-slate-800">
                 <button id="tabLoginBtn" onclick="switchAuthTab('login')" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-blue-600 text-white">Entrar</button>
                 <button id="tabRegisterBtn" onclick="switchAuthTab('register')" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white">Criar Conta</button>
@@ -97,11 +97,11 @@
                 </button>
             </form>
 
-            <!-- FORMULÁRIO DE REGISTO COM CÓDIGO DE CONVITE -->
+            <!-- FORMULÁRIO DE REGISTO -->
             <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Tipo de Perfil a Registar</label>
-                    <select id="regRole" onchange="updateRegisterFields()" class="w-full glass-input px-4 py-2.5 rounded-xl text-sm font-semibold">
+                    <select id="regRole" class="w-full glass-input px-4 py-2.5 rounded-xl text-sm font-semibold">
                         <option value="professor" class="bg-slate-900">Professor / Docente</option>
                         <option value="admin" class="bg-slate-900">Direcção / Administração</option>
                     </select>
@@ -125,13 +125,13 @@
                     <input type="password" id="regPassword" required placeholder="••••••••" class="w-full glass-input px-4 py-2.5 rounded-xl text-sm">
                 </div>
 
-                <!-- Campo dinâmico do Código de Convite -->
+                <!-- Campo do Código de Convite Protegido -->
                 <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
                     <label class="block text-xs font-bold text-amber-400 uppercase mb-1 flex items-center">
-                        <i class="fa-solid fa-key mr-1.5"></i> Código de Convite Obrigatório
+                        <i class="fa-solid fa-key mr-1.5"></i> Código de Convite
                     </label>
-                    <input type="text" id="regInviteCode" required placeholder="Inserir código" class="w-full glass-input px-4 py-2 rounded-xl text-sm font-mono tracking-widest text-center border-amber-500/30">
-                    <p id="inviteHelpText" class="text-[10px] text-slate-400 mt-1">Requer o código do corpo docente (90890114017).</p>
+                    <input type="password" id="regInviteCode" required placeholder="Insira o seu código" class="w-full glass-input px-4 py-2 rounded-xl text-sm font-mono text-center border-amber-500/30">
+                    <p class="text-[10px] text-slate-400 mt-1">Introduza o código de validação fornecido pela instituição.</p>
                 </div>
 
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all text-sm uppercase tracking-wider shadow-lg shadow-emerald-600/30">
@@ -161,7 +161,7 @@
                 </button>
             </div>
 
-            <!-- Navegação Ajustada ao Perfil -->
+            <!-- Navegação -->
             <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
                 <button onclick="navigate('dashboardSection')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 text-xs font-semibold text-slate-300 hover:text-white">
                     <i class="fa-solid fa-chart-pie text-blue-400 w-5"></i>
@@ -204,7 +204,7 @@
                 </button>
             </nav>
 
-            <!-- Rodapé Usuário -->
+            <!-- Rodapé Utilizador -->
             <div class="p-3 border-t border-slate-800">
                 <div class="flex items-center justify-between">
                     <div class="truncate">
@@ -221,13 +221,12 @@
         <!-- CONTEÚDO PRINCIPAL -->
         <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
 
-            <!-- HEADER NAVEGADOR -->
+            <!-- HEADER -->
             <header class="glass-panel border-b border-slate-800 sticky top-0 z-30 px-4 py-3 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white">
                         <i class="fa-solid fa-bars text-lg"></i>
                     </button>
-                    <!-- Botão Voltar Global -->
                     <button id="btnVoltar" onclick="goBack()" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg text-xs font-bold items-center space-x-1">
                         <i class="fa-solid fa-arrow-left"></i>
                         <span>Voltar</span>
@@ -240,7 +239,7 @@
                 </span>
             </header>
 
-            <!-- 1. SEÇÃO ESTATÍSTICAS -->
+            <!-- 1. ESTATÍSTICAS -->
             <section id="dashboardSection" class="p-4 md:p-6 space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="glass-panel p-4 rounded-2xl border border-slate-800">
@@ -277,10 +276,9 @@
                 </div>
             </section>
 
-            <!-- 2. SEÇÃO CRIAR CURSOS E DISCIPLINAS (OBJECTIVO) -->
+            <!-- 2. CURSOS E DISCIPLINAS -->
             <section id="cursosDisciplinasSection" class="hidden p-4 md:p-6 space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Formulário de Criar Curso -->
                     <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="text-xs font-bold text-slate-200 uppercase flex items-center">
                             <i class="fa-solid fa-folder-plus text-blue-500 mr-2"></i> Criar Novo Curso
@@ -300,7 +298,6 @@
                         </form>
                     </div>
 
-                    <!-- Formulário de Criar Disciplina associada a um Curso -->
                     <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="text-xs font-bold text-slate-200 uppercase flex items-center">
                             <i class="fa-solid fa-book-medical text-cyan-500 mr-2"></i> Adicionar Disciplina ao Curso
@@ -308,9 +305,7 @@
                         <form onsubmit="cadastrarDisciplina(event)" class="space-y-3">
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Seleccionar Curso</label>
-                                <select id="selectCursoDisc" required class="w-full glass-input px-3 py-2 rounded-xl text-xs font-semibold">
-                                    <!-- Dinâmico -->
-                                </select>
+                                <select id="selectCursoDisc" required class="w-full glass-input px-3 py-2 rounded-xl text-xs font-semibold"></select>
                             </div>
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Nome da Disciplina</label>
@@ -323,19 +318,15 @@
                     </div>
                 </div>
 
-                <!-- Tabela de Cursos e Disciplinas Cadastradas -->
                 <div class="glass-panel rounded-2xl border border-slate-800 p-5">
                     <h3 class="text-xs font-bold text-slate-200 uppercase mb-4">Estrutura Académica Existente</h3>
-                    <div id="listaCursosDisciplinas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <!-- Gerado Dinamicamente -->
-                    </div>
+                    <div id="listaCursosDisciplinas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 </div>
             </section>
 
-            <!-- 3. SEÇÃO GESTÃO DE SALAS E TURMAS -->
+            <!-- 3. SALAS E TURMAS -->
             <section id="salasSection" class="hidden p-4 md:p-6 space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Criar Sala -->
                     <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="text-xs font-bold text-slate-200 uppercase">Criar Nova Sala / Turma</h3>
                         <form onsubmit="cadastrarSala(event)" class="space-y-3">
@@ -361,7 +352,6 @@
                         </form>
                     </div>
 
-                    <!-- Cadastrar Aluno em Sala -->
                     <div class="glass-panel p-5 rounded-2xl border border-slate-800 lg:col-span-2 space-y-4">
                         <h3 class="text-xs font-bold text-slate-200 uppercase">Matricular Aluno em Turma</h3>
                         <form onsubmit="cadastrarAluno(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -386,7 +376,6 @@
                     </div>
                 </div>
 
-                <!-- Tabela de Alunos por Sala -->
                 <div class="glass-panel rounded-2xl border border-slate-800 p-5">
                     <h3 class="text-xs font-bold text-slate-200 uppercase mb-4">Listagem Geral de Alunos Cadastrados</h3>
                     <div class="overflow-x-auto">
@@ -400,18 +389,14 @@
                                     <th class="p-3 text-center">Acções</th>
                                 </tr>
                             </thead>
-                            <tbody id="tabelaAlunosBody" class="divide-y divide-slate-800/50">
-                                <!-- Dinâmico -->
-                            </tbody>
+                            <tbody id="tabelaAlunosBody" class="divide-y divide-slate-800/50"></tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. SEÇÃO LIVROS DE PONTO (CRIAÇÃO, ACESSO POR SENHA, FALTAS VERMELHAS E GUARDAR) -->
+            <!-- 4. LIVROS DE PONTO -->
             <section id="pontoSection" class="hidden p-4 md:p-6 space-y-6">
-                
-                <!-- Criar Livro de Ponto (Exclusivo Admin) -->
                 <div id="adminCriarPontoCard" class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                     <h3 class="text-xs font-bold text-slate-200 uppercase flex items-center">
                         <i class="fa-solid fa-plus-circle text-emerald-400 mr-2"></i> Criar Novo Livro de Ponto Protegido (Direcção)
@@ -441,7 +426,6 @@
                     </form>
                 </div>
 
-                <!-- Painel de Abertura do Livro de Ponto -->
                 <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                     <h3 class="text-xs font-bold text-slate-200 uppercase">Aceder a um Livro de Ponto Existente</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -461,7 +445,6 @@
                     </div>
                 </div>
 
-                <!-- Tabela de Chamada e Ocorrências -->
                 <div id="pontoTabelaContainer" class="hidden glass-panel rounded-2xl border border-slate-800 overflow-hidden">
                     <div class="p-4 bg-slate-900 border-b border-slate-800 flex justify-between items-center">
                         <h3 id="pontoTituloAtivo" class="text-xs font-bold text-slate-200 uppercase">Livro de Ponto Activo</h3>
@@ -483,15 +466,13 @@
                                     <th class="p-3">Descrição Detalhada da Infracção / Ocorrência</th>
                                 </tr>
                             </thead>
-                            <tbody id="pontoTbody" class="divide-y divide-slate-800/50">
-                                <!-- Dinâmico -->
-                            </tbody>
+                            <tbody id="pontoTbody" class="divide-y divide-slate-800/50"></tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. SEÇÃO PAUTA DE NOTAS AUTÓNOMA -->
+            <!-- 5. PAUTA DE NOTAS -->
             <section id="notasSection" class="hidden p-4 md:p-6 space-y-6">
                 <div class="glass-panel p-4 rounded-2xl border border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
@@ -523,15 +504,13 @@
                                     <th class="p-3">Estado</th>
                                 </tr>
                             </thead>
-                            <tbody id="pautaNotasBody" class="divide-y divide-slate-800/50">
-                                <!-- Dinâmico -->
-                            </tbody>
+                            <tbody id="pautaNotasBody" class="divide-y divide-slate-800/50"></tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- 6. SEÇÃO PESQUISA DE ALUNOS -->
+            <!-- 6. PESQUISA DE ALUNOS -->
             <section id="alunosSection" class="hidden p-4 md:p-6 space-y-6">
                 <div class="glass-panel p-4 rounded-2xl border border-slate-800">
                     <div class="relative">
@@ -571,7 +550,7 @@
                 </div>
             </section>
 
-            <!-- 7. SEÇÃO PROPINAS (APENAS ADMIN) -->
+            <!-- 7. PROPINAS -->
             <section id="propinasSection" class="hidden p-4 md:p-6 space-y-6">
                 <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                     <h3 class="text-xs font-bold text-slate-200 uppercase">Registar Pagamento de Propina</h3>
@@ -618,15 +597,13 @@
                                     <th class="p-3">Valor</th>
                                 </tr>
                             </thead>
-                            <tbody id="tabelaPropinasBody" class="divide-y divide-slate-800/50">
-                                <!-- Dinâmico -->
-                            </tbody>
+                            <tbody id="tabelaPropinasBody" class="divide-y divide-slate-800/50"></tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- 8. SEÇÃO ANOTAÇÕES PESSOAIS -->
+            <!-- 8. ANOTAÇÕES PESSOAIS -->
             <section id="anotacoesSection" class="hidden p-4 md:p-6 space-y-6">
                 <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                     <h3 class="text-xs font-bold text-slate-200 uppercase">Bloco de Notas e Lembretes Pessoais</h3>
@@ -636,27 +613,25 @@
                             Adicionar
                         </button>
                     </div>
-                    <div id="listaAnotacoes" class="space-y-2 pt-2">
-                        <!-- Dinâmico -->
-                    </div>
+                    <div id="listaAnotacoes" class="space-y-2 pt-2"></div>
                 </div>
             </section>
 
         </main>
     </div>
 
-    <!-- SDK FIREBASE V10 -->
+    <!-- SDK FIREBASE V10 (Nova Configuração) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, setDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyCgMLNvcGRrTBBTAUSrG6zAfp2fgscagFU",
-          authDomain: "nsdv-eabc0.firebaseapp.com",
-          projectId: "nsdv-eabc0",
-          storageBucket: "nsdv-eabc0.firebasestorage.app",
-          messagingSenderId: "948800536424",
-          appId: "1:948800536424:web:e818af05580c22aeafe0dd"
+          apiKey: "AIzaSyAua5jKmRwOIyqr4tDVm-woULIs_7useIM",
+          authDomain: "nsdv-26af5.firebaseapp.com",
+          projectId: "nsdv-26af5",
+          storageBucket: "nsdv-26af5.firebasestorage.app",
+          messagingSenderId: "533284350778",
+          appId: "1:533284350778:web:30934811400ed4307c7e03"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -666,13 +641,11 @@
         window.fb = { collection, addDoc, getDocs, doc, setDoc, updateDoc, deleteDoc, onSnapshot };
     </script>
 
-    <!-- CONTROLADOR LÓGICO COMPLETO DA APLICAÇÃO -->
+    <!-- CONTROLADOR LÓGICO -->
     <script>
-        // Códigos de Convite Obrigatórios
         const CODE_ADMIN = "99990452367";
         const CODE_PROF = "90890114017";
 
-        // Estado Global (Dados Zerados Inicialmente)
         let currentUser = null;
         let activePontoId = null;
         let navigationHistory = [];
@@ -688,7 +661,6 @@
             anotacoes: []
         };
 
-        // Troca de Tabs Login/Registo
         function switchAuthTab(tab) {
             const loginForm = document.getElementById('loginForm');
             const regForm = document.getElementById('registerForm');
@@ -705,31 +677,18 @@
                 regForm.classList.remove('hidden');
                 tabRegBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-blue-600 text-white";
                 tabLoginBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
-                updateRegisterFields();
             }
         }
 
-        function updateRegisterFields() {
-            const role = document.getElementById('regRole').value;
-            const help = document.getElementById('inviteHelpText');
-            if (role === 'admin') {
-                help.innerText = "Requer o código restrito da Direcção (99990452367).";
-            } else {
-                help.innerText = "Requer o código do corpo docente (90890114017).";
-            }
-        }
-
-        // CADASTRO COM CÓDIGO DE CONVITE
         async function handleRegister(e) {
             e.preventDefault();
             const role = document.getElementById('regRole').value;
             const inviteCode = document.getElementById('regInviteCode').value.trim();
             const email = document.getElementById('regEmail').value.trim().toLowerCase();
             const password = document.getElementById('regPassword').value;
-            const nome = document.getElementById('regNome').value;
-            const bi = document.getElementById('regBI').value;
+            const nome = document.getElementById('regNome').value.trim();
+            const bi = document.getElementById('regBI').value.trim();
 
-            // Validação de Código
             if (role === 'admin' && inviteCode !== CODE_ADMIN) {
                 alert('Código de convite inválido para Direcção/Administração!');
                 return;
@@ -740,27 +699,29 @@
             }
 
             if (!email.endsWith('@nsdv.edu.ao')) {
-                alert('Apenas e-mails com domínio institucional (@nsdv.edu.ao) podem ser registados.');
+                alert('Apenas e-mails institucionais (@nsdv.edu.ao) podem ser registados.');
                 return;
             }
 
             try {
-                // Guardar conta no Firestore na colecção "usuarios"
                 const userRef = window.fb.doc(window.db, "usuarios", email);
                 await window.fb.setDoc(userRef, {
-                    nome, bi, email, role, password
+                    nome: nome || "Utilizador",
+                    bi: bi || "N/A",
+                    email: email,
+                    role: role,
+                    password: password
                 });
 
-                alert('Conta registada com sucesso! Faça login para aceder ao sistema.');
+                alert('Conta criada com sucesso! Pode aceder agora.');
                 switchAuthTab('login');
                 document.getElementById('loginEmail').value = email;
             } catch (err) {
-                console.error(err);
-                alert('Erro ao guardar registo na base de dados.');
+                console.error("Erro no registo:", err);
+                alert('Erro na base de dados: ' + (err.message || 'Falha ao guardar registo.'));
             }
         }
 
-        // LOGIN NO SISTEMA
         async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -768,7 +729,6 @@
             const role = document.getElementById('loginRole').value;
 
             try {
-                // Sincronizar leitura de utilizador no Firebase
                 const usersSnap = await window.fb.getDocs(window.fb.collection(window.db, "usuarios"));
                 let userFound = null;
 
@@ -779,13 +739,12 @@
                     }
                 });
 
-                // Aceitar também logins diretos para desenvolvimento se coincidir o domínio
                 if (!userFound && email.endsWith('@nsdv.edu.ao')) {
                     userFound = { nome: email.split('@')[0].toUpperCase(), email, role };
                 }
 
                 if (!userFound) {
-                    alert('Credenciais inválidas ou tipo de perfil não correspondente!');
+                    alert('Credenciais inválidas ou perfil não correspondente!');
                     return;
                 }
 
@@ -799,13 +758,12 @@
                 document.getElementById('userEmailDisplay').innerText = currentUser.email;
                 document.getElementById('userRoleBadge').innerText = currentUser.role === 'admin' ? 'Direcção / Admin' : 'Docente / Prof';
 
-                // Inicializar escuta em tempo real dos dados zerados
                 sincronizarFirebase();
                 navigate('dashboardSection');
 
             } catch (err) {
-                console.error(err);
-                alert('Falha ao aceder à base de dados. Verifique a sua ligação.');
+                console.error("Erro no login:", err);
+                alert('Erro ao conectar à base de dados.');
             }
         }
 
@@ -815,11 +773,8 @@
             document.getElementById('authSection').classList.remove('hidden');
         }
 
-        // AMBIENTE SEPARADO POR PERFIL (DOCENTE VS ADMIN)
         function configurarAmbientePorPerfil() {
             const isAdmin = currentUser.role === 'admin';
-
-            // Elementos restritos à administração
             document.getElementById('navEstruturaBtn').style.display = isAdmin ? 'flex' : 'none';
             document.getElementById('navSalasBtn').style.display = isAdmin ? 'flex' : 'none';
             document.getElementById('navPropinasBtn').style.display = isAdmin ? 'flex' : 'none';
@@ -827,7 +782,6 @@
             document.getElementById('pontoPassInputContainer').style.display = isAdmin ? 'none' : 'block';
         }
 
-        // NAVEGAÇÃO E BOTÃO VOLTAR
         function navigate(sectionId) {
             if (currentSectionId !== sectionId) {
                 navigationHistory.push(currentSectionId);
@@ -867,7 +821,6 @@
                 const prev = navigationHistory.pop();
                 currentSectionId = prev;
                 navigate(prev);
-                // Evita acumular a navegação de retorno no histórico
                 navigationHistory.pop(); 
             }
         }
@@ -876,35 +829,29 @@
             document.getElementById('sidebar').classList.toggle('-translate-x-full');
         }
 
-        // SINCRONIZAÇÃO EM TEMPO REAL FIRESTORE (DADOS ZERADOS)
         function sincronizarFirebase() {
             if (!window.db) return;
 
-            // Escutar Cursos
             window.fb.onSnapshot(window.fb.collection(window.db, "cursos"), snap => {
                 state.cursos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                 atualizarUI();
             });
 
-            // Escutar Salas
             window.fb.onSnapshot(window.fb.collection(window.db, "salas"), snap => {
                 state.salas = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                 atualizarUI();
             });
 
-            // Escutar Alunos
             window.fb.onSnapshot(window.fb.collection(window.db, "alunos"), snap => {
                 state.alunos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                 atualizarUI();
             });
 
-            // Escutar Pontos
             window.fb.onSnapshot(window.fb.collection(window.db, "livro_ponto"), snap => {
                 state.pontos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                 atualizarSelectPontos();
             });
 
-            // Escutar Propinas
             window.fb.onSnapshot(window.fb.collection(window.db, "propinas"), snap => {
                 state.propinas = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                 carregarTabelaPropinas();
@@ -918,14 +865,15 @@
             atualizarEstatisticas();
         }
 
-        // 1. CRIAR CURSOS E DISCIPLINAS
         async function cadastrarCurso(e) {
             e.preventDefault();
             const nome = document.getElementById('novoCursoNome').value.trim();
             const sigla = document.getElementById('novoCursoSigla').value.trim().toUpperCase();
 
             await window.fb.addDoc(window.fb.collection(window.db, "cursos"), {
-                nome, sigla, disciplinas: []
+                nome: nome,
+                sigla: sigla,
+                disciplinas: []
             });
 
             document.getElementById('novoCursoNome').value = '';
@@ -944,11 +892,11 @@
                 disciplinas.push(nomeDisc);
 
                 await window.fb.updateDoc(window.fb.doc(window.db, "cursos", cursoId), {
-                    disciplinas
+                    disciplinas: disciplinas
                 });
 
                 document.getElementById('novaDiscNome').value = '';
-                alert('Disciplina adicionada ao curso!');
+                alert('Disciplina adicionada!');
             }
         }
 
@@ -959,7 +907,7 @@
             if (!container) return;
 
             if (state.cursos.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 col-span-3">Nenhum curso registado. Crie o primeiro curso acima.</p>`;
+                container.innerHTML = `<p class="text-xs text-slate-500 col-span-3">Nenhum curso registado.</p>`;
                 selectCurso.innerHTML = `<option value="">Nenhum curso disponível</option>`;
                 return;
             }
@@ -983,7 +931,6 @@
             `).join('');
         }
 
-        // 2. SALAS E MATRÍCULAS DE ALUNOS
         async function cadastrarSala(e) {
             e.preventDefault();
             const nome = document.getElementById('salaNome').value.trim();
@@ -991,11 +938,13 @@
             const periodo = document.getElementById('salaPeriodo').value;
 
             await window.fb.addDoc(window.fb.collection(window.db, "salas"), {
-                nome, cursoId, periodo
+                nome: nome,
+                cursoId: cursoId,
+                periodo: periodo
             });
 
             document.getElementById('salaNome').value = '';
-            alert('Sala cadastrada com sucesso!');
+            alert('Sala cadastrada!');
         }
 
         async function cadastrarAluno(e) {
@@ -1005,12 +954,16 @@
             const salaId = document.getElementById('alunoSalaSelect').value;
 
             await window.fb.addDoc(window.fb.collection(window.db, "alunos"), {
-                nome, bi, salaId, faltasVermelhas: 0, ocorrencias: []
+                nome: nome,
+                bi: bi,
+                salaId: salaId,
+                faltasVermelhas: 0,
+                ocorrencias: []
             });
 
             document.getElementById('alunoNome').value = '';
             document.getElementById('alunoBI').value = '';
-            alert('Aluno matriculado com sucesso!');
+            alert('Aluno matriculado!');
         }
 
         function atualizarSelects() {
@@ -1088,12 +1041,11 @@
         }
 
         async function eliminarAluno(id) {
-            if (confirm('Tem a certeza que deseja eliminar este aluno?')) {
+            if (confirm('Deseja mesmo eliminar este aluno?')) {
                 await window.fb.deleteDoc(window.fb.doc(window.db, "alunos", id));
             }
         }
 
-        // 3. LIVRO DE PONTO DIGITAL
         async function criarLivroPonto(e) {
             e.preventDefault();
             const salaId = document.getElementById('pontoCriarSala').value;
@@ -1102,23 +1054,23 @@
             const senha = document.getElementById('pontoCriarSenha').value;
 
             if (!disciplina) {
-                alert('Registe primeiro disciplinas no curso correspondente a esta sala!');
+                alert('Registe disciplinas primeiro!');
                 return;
             }
 
             const sala = state.salas.find(s => s.id === salaId);
 
             await window.fb.addDoc(window.fb.collection(window.db, "livro_ponto"), {
-                salaId,
+                salaId: salaId,
                 salaNome: sala ? sala.nome : '',
-                disciplina,
-                data,
-                senha,
+                disciplina: disciplina,
+                data: data,
+                senha: senha,
                 registos: {}
             });
 
             document.getElementById('pontoCriarSenha').value = '';
-            alert('Livro de Ponto criado e protegido com sucesso!');
+            alert('Livro de Ponto criado!');
         }
 
         function atualizarSelectPontos() {
@@ -1126,7 +1078,7 @@
             if (!select) return;
 
             if (state.pontos.length === 0) {
-                select.innerHTML = `<option value="">Nenhum livro de ponto disponível</option>`;
+                select.innerHTML = `<option value="">Nenhum livro disponível</option>`;
                 return;
             }
 
@@ -1142,13 +1094,12 @@
             const ponto = state.pontos.find(p => p.id === pontoId);
 
             if (!ponto) {
-                alert('Seleccione um livro de ponto válido!');
+                alert('Seleccione um livro válido!');
                 return;
             }
 
-            // Validação de Senha para Professor
             if (currentUser.role !== 'admin' && ponto.senha !== senhaIn) {
-                alert('Senha de acesso incorreta para este Livro de Ponto!');
+                alert('Senha incorreta!');
                 return;
             }
 
@@ -1164,7 +1115,7 @@
             const alunosTurma = state.alunos.filter(a => a.salaId === ponto.salaId);
 
             if (alunosTurma.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Sem alunos matriculados nesta turma.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Sem alunos na turma.</td></tr>`;
                 return;
             }
 
@@ -1185,7 +1136,7 @@
                             <input type="radio" name="ponto_${a.id}" value="FV" ${reg.tipo === 'FV' ? 'checked' : ''} class="w-4 h-4 accent-rose-500">
                         </td>
                         <td class="p-3">
-                            <input type="text" id="obs_${a.id}" value="${reg.obs || ''}" placeholder="Descrever ocorrência disciplinar..." class="w-full glass-input px-3 py-1.5 rounded text-xs">
+                            <input type="text" id="obs_${a.id}" value="${reg.obs || ''}" placeholder="Ocorrência..." class="w-full glass-input px-3 py-1.5 rounded text-xs">
                         </td>
                     </tr>
                 `;
@@ -1205,10 +1156,9 @@
                 for (let r of radios) {
                     if (r.checked) tipo = r.value;
                 }
-                const obs = document.getElementById(`obs_${a.id}`).value;
-                registos[a.id] = { tipo, obs };
+                const obs = document.getElementById(`obs_${a.id}`).value || "";
+                registos[a.id] = { tipo: tipo, obs: obs };
 
-                // Se for Falta Vermelha (Disciplinar), registar gravidade no perfil do aluno
                 if (tipo === 'FV') {
                     const alunoRef = window.fb.doc(window.db, "alunos", a.id);
                     const ocorrencias = a.ocorrencias || [];
@@ -1216,20 +1166,18 @@
 
                     await window.fb.updateDoc(alunoRef, {
                         faltasVermelhas: (a.faltasVermelhas || 0) + 1,
-                        ocorrencias
+                        ocorrencias: ocorrencias
                     });
                 }
             }
 
-            // Atualizar no Firestore
             await window.fb.updateDoc(window.fb.doc(window.db, "livro_ponto", activePontoId), {
-                registos
+                registos: registos
             });
 
-            alert('Alterações guardadas com sucesso no Livro de Ponto!');
+            alert('Livro de ponto guardado!');
         }
 
-        // 4. PAUTA DE NOTAS
         function carregarPautaNotas() {
             const tbody = document.getElementById('pautaNotasBody');
             const salaId = document.getElementById('notasSalaSelect').value;
@@ -1264,21 +1212,20 @@
             const alunosTurma = state.alunos.filter(a => a.salaId === salaId);
 
             for (let a of alunosTurma) {
-                const mac = Number(document.getElementById(`mac_${a.id}`).value);
-                const npp = Number(document.getElementById(`npp_${a.id}`).value);
-                const npt = Number(document.getElementById(`npt_${a.id}`).value);
+                const mac = Number(document.getElementById(`mac_${a.id}`).value) || 0;
+                const npp = Number(document.getElementById(`npp_${a.id}`).value) || 0;
+                const npt = Number(document.getElementById(`npt_${a.id}`).value) || 0;
 
                 const alunoRef = window.fb.doc(window.db, "alunos", a.id);
                 const notas = a.notas || {};
-                notas['geral'] = { mac, npp, npt };
+                notas['geral'] = { mac: mac, npp: npp, npt: npt };
 
-                await window.fb.updateDoc(alunoRef, { notas });
+                await window.fb.updateDoc(alunoRef, { notas: notas });
             }
 
-            alert('Pauta de notas guardada com sucesso!');
+            alert('Pauta guardada!');
         }
 
-        // 5. PESQUISA GLOBAL DO ALUNO
         function pesquisarAluno() {
             const query = document.getElementById('inputPesquisaAluno').value.toLowerCase().trim();
             const ficha = document.getElementById('resultadoFichaAluno');
@@ -1305,7 +1252,7 @@
                 if (aluno.ocorrencias && aluno.ocorrencias.length > 0) {
                     ocorrenciasList.innerHTML = aluno.ocorrencias.map(o => `<p class="border-b border-slate-800 pb-1">${o}</p>`).join('');
                 } else {
-                    ocorrenciasList.innerHTML = `Sem registo de infracções disciplinares.`;
+                    ocorrenciasList.innerHTML = `Sem registo de infracções.`;
                 }
 
                 const n = (aluno.notas && aluno.notas['geral']) || { mac: 0, npp: 0, npt: 0 };
@@ -1318,7 +1265,6 @@
             }
         }
 
-        // 6. PROPINAS
         async function registarPropina(e) {
             e.preventDefault();
             const alunoId = document.getElementById('propinaAlunoSelect').value;
@@ -1329,13 +1275,13 @@
 
             await window.fb.addDoc(window.fb.collection(window.db, "propinas"), {
                 alunoNome: aluno ? aluno.nome : 'Aluno',
-                mes,
+                mes: mes,
                 valor: Number(valor).toLocaleString('pt-AO') + ' AOA',
                 data: new Date().toLocaleDateString('pt-AO')
             });
 
             document.getElementById('propinaValor').value = '';
-            alert('Pagamento de propina registado!');
+            alert('Pagamento registado!');
         }
 
         function carregarTabelaPropinas() {
@@ -1343,7 +1289,7 @@
             if (!tbody) return;
 
             if (state.propinas.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">Nenhum pagamento de propina registado.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">Nenhum pagamento.</td></tr>`;
                 return;
             }
 
@@ -1357,7 +1303,6 @@
             `).join('');
         }
 
-        // 7. ANOTAÇÕES PESSOAIS
         function adicionarAnotacao() {
             const input = document.getElementById('inputNotaTexto');
             const val = input.value.trim();
@@ -1378,7 +1323,6 @@
             `).join('');
         }
 
-        // 8. ESTATÍSTICAS E GRÁFICOS
         let chartInstance1 = null;
         let chartInstance2 = null;
 
